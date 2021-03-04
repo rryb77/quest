@@ -17,7 +17,13 @@ namespace Quest
             if (adventurer.Awesomeness > 0)
             {
                 for (int i = adventurer.Awesomeness; i > 0; i--)
-                    Console.WriteLine("");
+                {
+                    Console.WriteLine(_text);
+                }
+            }
+            else if (adventurer.Awesomeness <= 0)
+            {
+                Console.WriteLine("You are a disgrace to all other adventurers in the world!");
             }
         }
     }

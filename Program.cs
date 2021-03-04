@@ -57,6 +57,7 @@ namespace Quest
             };
 
             Adventurer theAdventurer = new Adventurer(Console.ReadLine(), theAdventurerRobe, theAdventurerHat);
+            Prize thePrize = new Prize("The best prize in the world!");
 
             // A list of challenges for the Adventurer to complete
             // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
@@ -91,6 +92,8 @@ namespace Quest
             {
                 Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
             }
+
+            thePrize.ShowPrize(theAdventurer);
 
             Console.WriteLine("");
             Console.Write("Would you like to play again? [Y/N]: ");
