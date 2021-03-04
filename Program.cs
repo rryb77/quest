@@ -63,8 +63,11 @@ namespace Quest
 
             Robe theAdventurerRobe = new Robe()
             {
-                color = "red",
-                length = 50,
+                Colors = new List<string>()
+                {
+                 "red", "green", "gold", "blue", "black"
+                },
+                Length = 50,
             };
 
             Hat theAdventurerHat = new Hat()
@@ -89,45 +92,56 @@ namespace Quest
             };
 
 
-            var shuffledList = challenges.OrderBy(a => Guid.NewGuid()).ToList();
+            bool playing = true;
 
-            Console.WriteLine(theAdventurer.GetDescription());
-
-            int count = 0;
-
-            // Loop through all the challenges and subject the Adventurer to them            
-            foreach (Challenge challenge in shuffledList)
+            while (playing)
             {
-                if (count < 5)
+                var shuffledList = challenges.OrderBy(a => Guid.NewGuid()).ToList();
+
+                Console.WriteLine(theAdventurer.GetDescription());
+                Console.WriteLine($"Current Awesomeness: {theAdventurer.Awesomeness}");
+
+                int count = 0;
+
+                // Loop through all the challenges and subject the Adventurer to them            
+                foreach (Challenge challenge in shuffledList)
                 {
-                    challenge.RunChallenge(theAdventurer);
-                    count++;
+                    if (count < 5)
+                    {
+                        challenge.RunChallenge(theAdventurer);
+                        count++;
+                    }
                 }
-            }
 
-            // This code examines how Awesome the Adventurer is after completing the challenges
-            // And praises or humiliates them accordingly
-            if (theAdventurer.Awesomeness >= maxAwesomeness)
-            {
-                Console.WriteLine("YOU DID IT! You are truly awesome!");
-            }
-            else if (theAdventurer.Awesomeness <= minAwesomeness)
-            {
-                Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
-            }
-            else
-            {
-                Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
-            }
+                // This code examines how Awesome the Adventurer is after completing the challenges
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
+                {
+                    Console.WriteLine("YOU DID IT! You are truly awesome!");
+                }
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
+                {
+                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                }
+                else
+                {
+                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                }
 
-            thePrize.ShowPrize(theAdventurer);
+                thePrize.ShowPrize(theAdventurer);
 
-            Console.WriteLine("");
-            Console.Write("Would you like to play again? [Y/N]: ");
-            string userInput = Console.ReadLine().ToLower();
-            if (userInput == "y")
-            {
-                Main(args);
+                Console.WriteLine("");
+                Console.Write("Would you like to play again? [Y/N]: ");
+                string userInput = Console.ReadLine().ToLower();
+                if (userInput == "y")
+                {
+                    theAdventurer.Awesomeness = 50 + (theAdventurer.QuestSuccess * 10);
+                    Console.Clear();
+                }
+                else
+                {
+                    playing = false;
+                }
             }
         }
     }

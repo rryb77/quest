@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace Quest
 {
     public class Robe
     {
-        public string color { get; set; }
-        public int length { get; set; }
+        public List<string> Colors { get; set; }
+        public int Length { get; set; }
     }
 }

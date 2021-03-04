@@ -1,3 +1,5 @@
+using System;
+
 namespace Quest
 {
     // An instance of the Adventurer class is an object that will undergo some challenges
@@ -15,6 +17,8 @@ namespace Quest
         //  So it can be read and changed by any code in the application
         public int Awesomeness { get; set; }
 
+        public int QuestSuccess { get; set; }
+
         // A constructor to make a new Adventurer object with a given name
         public Adventurer(string name, Robe robe, Hat hat)
         {
@@ -22,6 +26,7 @@ namespace Quest
             ColorfulRobe = robe;
             ShinyHat = hat;
             Awesomeness = 50;
+            QuestSuccess = 0;
         }
 
 
@@ -53,8 +58,10 @@ namespace Quest
 
         public string GetDescription()
         {
-
-            return $"Adventurer, {Name} has a {ColorfulRobe.length} inch long {ColorfulRobe.color} robe, and a {ShinyHat.ShininessDescription} hat.";
+            Random rnd = new Random();
+            int num = rnd.Next(ColorfulRobe.Colors.Count);
+            string robeColor = ColorfulRobe.Colors[num];
+            return $"Adventurer, {Name} has a {ColorfulRobe.Length} inch long {robeColor} robe, and a {ShinyHat.ShininessDescription} hat.";
         }
     }
 }
