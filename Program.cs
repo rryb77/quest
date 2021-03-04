@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Every class in the program is defined within the "Quest" namespace
 // Classes within the same namespace refer to one another without a "using" statement
@@ -32,6 +33,21 @@ namespace Quest
 ",
                 4, 20
             );
+            Challenge bestGame = new Challenge(
+                @"What's the best game in the world?
+    1) Super Mario Bros.
+    2) Pacman
+    3) Galage
+    4) This game!
+", 4, 50);
+
+            Challenge bestName = new Challenge(
+                @"What's the best name in the world?
+    1) Dave
+    2) Shawn
+    3) Ryan
+    4) Carl
+", 3, 20);
 
             // "Awesomeness" is like our Adventurer's current "score"
             // A higher Awesomeness is better
@@ -67,15 +83,26 @@ namespace Quest
                 theAnswer,
                 whatSecond,
                 guessRandom,
-                favoriteBeatle
+                favoriteBeatle,
+                bestGame,
+                bestName
             };
+
+
+            var shuffledList = challenges.OrderBy(a => Guid.NewGuid()).ToList();
 
             Console.WriteLine(theAdventurer.GetDescription());
 
-            // Loop through all the challenges and subject the Adventurer to them
-            foreach (Challenge challenge in challenges)
+            int count = 0;
+
+            // Loop through all the challenges and subject the Adventurer to them            
+            foreach (Challenge challenge in shuffledList)
             {
-                challenge.RunChallenge(theAdventurer);
+                if (count < 5)
+                {
+                    challenge.RunChallenge(theAdventurer);
+                    count++;
+                }
             }
 
             // This code examines how Awesome the Adventurer is after completing the challenges
